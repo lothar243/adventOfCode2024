@@ -13,6 +13,16 @@ def isSafe(report):
             return False
     return True
 
+def removeLevels(report):
+    if(isSafe(report)):
+        return True
+    for i in range(len(report)):
+        withoutLevel = report[:]
+        withoutLevel.pop(i)
+        if isSafe(withoutLevel):
+            return True
+    return False
+
 def main(filename):
     with open(filename, 'r') as inputfile:
         reports = [[int(val) for val in line.split()] for line in inputfile]
@@ -21,7 +31,7 @@ def main(filename):
     sum = 0
     for report in reports:
         print(report, end=" ")
-        if(isSafe(report)):
+        if(removeLevels(report)):
             sum += 1
             print("safe")
     print(sum)            
